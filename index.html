@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+      body[data-time="morning"] {
+        background-color: #F5D020; /* morning background color */
+      }
+      body[data-time="afternoon"]{
+        background-color: #eb8ec0; /* afternoon background color */
+      }
+      body[data-time="evening"] {
+        background-color: #FD9F0A; /* evening background color */
+      }
+      body[data-time="night"] {
+        background-color: #4bae9a; /* night background color */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="datetime"></div>
+    <div id="greeting"></div>
+    <script>
+      const datetime = document.getElementById('datetime');
+      const greeting = document.getElementById('greeting');
+      let name = prompt("What's your name?");
+      if (!name) {
+        name = 'stranger';
+      }
+
+      function updateDateTime() {
+        const now = new Date();
+        const hour = now.getHours();
+        const datetimeString = now.toLocaleString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+        datetime.textContent = datetimeString;
+
+        const message = (hour >= 6 && hour < 12) ? "Good morning!" :
+                        (hour >= 12 && hour < 18) ? "Good afternoon!" :
+                        (hour >= 18 && hour < 22) ? "Good evening!" :
+                        "Good night!";
+        greeting.textContent = message;
+        greeting.insertAdjacentHTML('beforeend', '<br>On this perfect day,<br>Nothing standing in my way.');
+        greeting.insertAdjacentHTML('beforeend', `<br>Welcome, ${name}!`);
+        greeting.insertAdjacentHTML('beforeend', `<br> ${name}'s To Do List`);
+
+      
+        if (hour >= 6 && hour < 12) {
+          document.body.setAttribute("data-time", "morning");
+        } else if (hour >= 12 && hour < 18) {
+          document.body.setAttribute("data-time", "afternoon");
+        } else if (hour >= 18 && hour < 22) {
+          document.body.setAttribute("data-time", "evening");
+        } else {
+          document.body.setAttribute("data-time", "night");
+        }
+      }
+
+      setInterval(updateDateTime, 1000);
+    </script>
+
+    <div class="wrapper">
+      <div class="task-input">
+        <input type="text" placeholder="Add a new task">
+      </div>
+      <div class="controls">
+        <div class="filters">
+          <span class="active" id="all">All</span>
+          <span id="pending">Pending</span>
+          <span id="completed">Completed</span>
+        </div>
+        <button class="clear-btn">Clear All</button>
+      </div>
+      <ul class="task-box"></ul>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
