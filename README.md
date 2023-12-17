@@ -10,6 +10,7 @@ A simple and visually appealing to-do list app created with HTML, CSS, and Vanil
 - Add, edit, and remove tasks effortlessly.
 - Completed tasks are visually distinguished, crossed off, and moved to a separate section.
 - User-friendly tabs for easy navigation between completed and pending tasks.
+- Deployed on Vercel and AWS Services
   
 
 ## Tech Stack
